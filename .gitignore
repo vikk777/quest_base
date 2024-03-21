@@ -1,0 +1,12 @@
+*.sublime-*
+*__pycache__*
+quest
+.env
+run.sh
+run.ps1
+app/static/photo
+site_elements*
+.init
+design/
+node_modules/
+logs/
