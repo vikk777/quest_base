@@ -1,0 +1,1 @@
+.\node_modules\.bin\lessc .\app\static\less\style.less .\app\static\css/style.css -x

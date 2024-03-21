@@ -1,0 +1,43 @@
+{% import 'macros/forms.j2' as mForms %}
+{% import 'macros/utils.j2' as mUtils %}
+{% import 'macros/buttons.j2' as mButtons %}
+
+
+{% macro photosGridItem(photo, deletePhoto, setRoomCover=None, roomId=None, load=True) %}
+    {%- include 'inc/photos_grid.html' %}
+{% endmacro %}
+
+{% macro comments(comments, user, formAdd=None, room=None, formDelete=None, next=None) %}
+    <h2 class="mt-4 text-center">Отзывы</h2>
+
+    {% if user.is_authenticated %}
+        {{ mForms.renderForm(formAdd, url_for('addComment'), values={'room': room},
+                      submit=mButtons.comment) }}
+    {% else %}
+        <p><a href="{{ url_for('login') }}">Войдите</a>, чтобы оставлять комментарии.</p>
+    {% endif %}
+
+    {% for comment in comments %}
+        <div class="row">
+            <div class="col-lg-10 pt-5">
+                <div class="row">
+                    <div class="col-auto">
+                        <span class="lead">
+                            {{ comment.user.name }}
+                        </span>
+                        <small class="text-muted">{{ mUtils.renderDate(comment.date) }}</small>
+                    </div>
+                    {%- if formDelete %}
+                        <div class="col-auto">
+                            {{ mForms.renderForm(formDelete, url_for('deleteComment', id=comment.id),
+                                          class='with-icon', submit=mButtons.trash, inline=True) }}
+                        </div>
+                    {% endif %}
+                </div>
+                <p>
+                    {{ comment.text|e|replace('\n', '<br>') }}
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+{% endmacro %}

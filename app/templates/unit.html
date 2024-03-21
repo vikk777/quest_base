@@ -1,0 +1,48 @@
+{% extends "base_page.html" %}
+
+{% block content %}
+    <div class="top-0">
+        <div class="progress position-relative">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ progress }}%"></div>
+        </div>
+    </div>
+
+    <section class="pt-5">
+        <div class="container ps-5 pt-5 pe-5 pb-5 rounded-4">
+            <h1 class="text-center"></h1>
+
+            <h2 class="pt-3 text-center">{% block unitHeader %}{% endblock unitHeader %}</h2>
+            <h3 class="pt-3 text-center">{% block blockDescription %}{% endblock blockDescription %}</h3>
+            <h4 class="pt-3 text-center">{% block unitQuestion %}{% endblock unitQuestion %}</h4>
+            {% block unitBody %}
+            {% endblock unitBody %}
+
+            {% block unitForm %}
+            <div class="row justify-content-center pt-3">
+                <div class="col-6">
+                    {{ mForms.renderFormGroup(form, url_for('checkUnit', id=unit.id), id='unit', submits=[mButtons.answer]) }}
+                </div>
+            </div>
+            {% endblock unitForm %}
+
+            {% block unitHint %}
+            {% if unit.hint %}
+            <div id="hintContainer" class="d-none">
+                <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#hint" aria-expanded="false" aria-controls="collapseExample">
+                    Подсказка
+                </button>
+
+                <div id="hint" class="collapse">
+                    {{ unit.hint }}
+                </div>
+            </div>
+            {% endif %}
+            {% endblock unitHint %}
+        </div>
+    </section>
+{% endblock content %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="module" src="{{ url_for('static', filename='js/units.js') }}"></script>
+{% endblock scripts %}

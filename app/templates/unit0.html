@@ -1,0 +1,13 @@
+{% extends "unit.html" %}
+
+{% block unitHeader %}Header{% endblock unitHeader %}
+
+
+{% block unitBody %}
+    <h2 class="pt-3 text-center">Unit name</h2>
+    <div class="row justify-content-center">
+        <div class="col-6">
+            {{ mForms.renderFormGroup(form, url_for('checkUnit', id=unit.id), id='unit', submits=[mButtons.answer]) }}
+        </div>
+    </div>
+{% endblock unitBody %}

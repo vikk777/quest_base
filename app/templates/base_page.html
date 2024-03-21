@@ -1,0 +1,45 @@
+{% import "macros/utils.j2" as mUtils %}
+{% import 'macros/forms.j2' as mForms %}
+{% import 'macros/blocks.j2' as mBlocks %}
+{% import 'macros/buttons.j2' as mButtons %}
+
+
+{%- block doc -%}
+<!DOCTYPE html>
+<html{% block html_attribs %}{% endblock html_attribs %}>
+{%- block html %}
+<head>
+{%- block head %}
+    <title>{% block title -%}{%- endblock title -%}</title>
+
+    {%- block metas %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%- endblock metas -%}
+
+    {%- block styles %}
+    <link type="text/css" href="{{ url_for('static', filename='css/bootstrap-icons.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    {# Fonts #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" rel="stylesheet"/>
+    {%- endblock styles -%}
+
+{%- endblock head %}
+</head>
+<body class="position-relative" {% block body_attribs %}{%- endblock body_attribs %}>
+    {% block content %}
+    {% endblock content %}
+
+    {%- include 'inc/alerts.html' %}
+
+    {% block scripts -%}
+    <script src="https://cdn.jsdelivr.net/npm/less"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jq/jq.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap/bootstrap.bundle.js') }}"></script>
+    {%- endblock scripts -%}
+</body>
+{%- endblock html -%}
+</html>
+{%- endblock doc -%}

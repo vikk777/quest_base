@@ -1,0 +1,138 @@
+/* icons */
+
+.bi::before,
+[class^="bi-"]::before,
+[class*=" bi-"]::before {
+    font-family: bootstrap-icons, 'Material Symbols Outlined' !important;
+/*    vertical-align: revert;*/
+}
+
+.bi-bed::before {
+    content: '\efdf';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-park::before {
+    content: '\ea99';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-wc::before {
+    content: '\e63d';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-family::before {
+    content: '\f1a2';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-shower::before {
+    content: '\f061';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-bath::before {
+    content: '\ea41';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-baby-changing::before {
+    content: '\f19b';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-hand-wash::before {
+    content: '\f1b1';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-kettle::before {
+    content: '\e2b9';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-dresser::before {
+    content: '\e210';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-microwave::before {
+    content: '\e847';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-iron::before {
+    content: '\e583';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-house-siding::before {
+    content: '\f202';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-umbrella::before {
+    content: '\f1ad';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-house::before {
+    content: '\ea44';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-chair::before {
+    content: '\efed';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-coffee::before {
+    content: '\efef';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-checkroom::before {
+    content: '\f19e';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-kitchen::before {
+    content: '\eb47';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-light::before {
+    content: '\f02a';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-garage::before {
+    content: '\f011';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-grill::before {
+    content: '\ea47';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-deck::before {
+    content: '\ea42';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-weekend::before {
+    content: '\e16b';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-flatware::before {
+    content: '\f00c';
+    font-family: 'Material Symbols Outlined' !important;
+}
+
+.bi-tv::before {
+    content: '\e830';
+    font-family: 'Material Symbols Outlined' !important;
+}

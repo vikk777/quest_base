@@ -1,0 +1,91 @@
+{% import 'macros/buttons.j2' as mButtons %}
+
+
+{% macro modalForm(form, action='', method='POST', modalId='', class='', values={}, submit=mButtons.primary) %}
+    <div class="modal fade" id="{{ modalId }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Добавить блок</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% set formId = form.__class__.__name__ %}
+                    {% set formId = formId|replace(formId[0], formId[0]|lower, 1) %}
+                    <form id="{{ formId }}" action="{{ action }}" method="{{ method }}" {{ 'class="%s"' % class if class }}>
+                    {%- for field in form %}
+                        {{ renderField(field, values[field.name] or field.data or False) }}
+                    {% endfor %}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn {{ submit.class }}" data-bs-dismiss="modal" type="submit" form="{{ formId }}">{{ submit.text }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro renderForm(form, action, method='POST', id='', class='', values={}, attrs={}, enctype='', submit=None) %}
+    <form action="{{ action }}" method="{{ method }}" {{ 'id=%s' % id if id }} {{ "class=%s" % class if class }} {{ 'enctype=%s' % enctype if enctype }}>
+        {%- for field in form %}
+            {{ renderField(field, values[field.id] or field.data or False, attrs[field.id]) }}
+        {% endfor %}
+        {% if submit %}
+            <button class="btn {{ submit.class }}" {{ submit.attrs }} type="submit">{{ submit.text }}</button>
+        {% endif %}
+    </form>
+{% endmacro %}
+
+
+{% macro renderFormGroup(form, action, method='POST', id='', class='', values={}, attrs={}, enctype='', datalist=None, submits=[], forms=[]) %}
+    <form action="{{ action }}" method="{{ method }}" {{ 'id=%s' % id if id }} {{ "class=%s" % class if class }} {{ 'enctype=%s' % enctype if enctype }}>
+        {%- for field in form %}
+            {{ renderFieldGroup(field, values[field.id] or field.data or False, submits, forms, attrs[field.id] or {}, datalist) }}
+        {% endfor %}
+    </form>
+{% endmacro %}
+
+
+{% macro renderField(field, value, attrs) %}
+    {%- if field.type == 'CSRFTokenField'%}
+        {{ field() }}
+    {% elif field.widget.input_type == 'hidden' %}
+        {{ field(value=value) }}
+    {% else %}
+        <div class="mb-3">
+            {{ field.label if field.label.text and field.label.text|lower != field.name|lower and field.type != 'BooleanField' }}
+            {% if field.type == 'BooleanField' %}
+                <label class="checkbox-ios">
+                    {{ field(checked=True, class_= 'form-check-input') if value else
+                       field(class_= 'form-check-input') }}
+                    <span class="checkbox-ios-switch"></span>
+                    {{ field.label.text }}
+                </label>
+            {% elif 'SelectField' in field.type %}
+                {{ field(value=value, class_= 'form-select') }}
+            {% else %}
+                {{ field(value=value, class_= 'form-control') }}
+            {% endif %}
+        </div>
+    {% endif %}
+{% endmacro %}
+
+
+{% macro renderFieldGroup(field, value, submits, forms, attrs, datalist) %}
+    {%- if field.type == 'CSRFTokenField'%}
+        {{ field() }}
+    {% elif field.widget.input_type == 'hidden' %}
+        {{ field(value=value) }}
+    {% else %}
+        {{ field.label if field.label.text and field.label.text|lower != field.name|lower }}
+        <div class="input-group mb-3">
+            {{ field(value=value, class_='form-check-input' if field.type == 'BooleanField' else 'form-control',
+                     list_=datalist or False, **attrs) }}
+            {% for submit in submits %}
+                <button class="btn {{ submit.class }}" type="submit" {{ 'form=%s' % forms[loop.index0] if forms }}>{{ submit.text }}</button>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endmacro %}

@@ -1,0 +1,57 @@
+{% macro showMessages(category='all') %}
+    {% if category == 'all' %}
+        {% set messages = get_flashed_messages(with_categories=True) %}
+    {% else %}
+        {% set messages = get_flashed_messages(category_filter=[category], with_categories=True) %}
+    {% endif %}
+
+    {%- if messages %}
+        <div id="alerts" class="col-auto position-fixed end-0 top-0 mt-5 me-4 z-max">
+        {%- for category, text in messages %}
+            <div class="alert alert-{{ category if category != 'message' else 'info' }} alert-dismissible fade show" role="alert">
+                <div>{{ text }}</div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+{% endmacro %}
+
+
+{% macro renderDate(date, format='%d %b %Y') %}
+    {% if date %}
+    {% set monthsEn = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] %}
+    {% set monthsRu = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'] %}
+    {% set dateStr = date.strftime(format) %}
+    {{ dateStr.replace(monthsEn[date.month - 1], monthsRu[date.month - 1]) }}
+    {% endif %}
+{% endmacro %}
+
+
+{% macro renderNights(begin, end) %}
+    {% if begin and end %}
+    {% set nights = (end - begin).days %}
+    {{ nights }}
+    {% if nights > 9 and nights < 21 %}
+        ночей
+    {% elif nights % 10 > 4 %}
+        ночей
+    {% elif nights % 10 > 1 %}
+        ночи
+    {% else %}
+        ночь
+    {% endif %}
+    {% endif %}
+{% endmacro %}
+
+
+{% macro renderGuests(guests) %}
+    {% if guests %}
+    {{ guests }} {{ "гостей" if guests > 4 else "гостя" if guests > 1 else "гость" }}
+    {% endif %}
+{% endmacro %}
+
+
+{% macro bookingStatus(booking) %}
+    {{ "bg-primary text-light" if booking.accepted else "" }}
+{% endmacro %}
