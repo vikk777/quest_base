@@ -57,14 +57,15 @@
         <div class="mb-3">
             {{ field.label if field.label.text and field.label.text|lower != field.name|lower and field.type != 'BooleanField' }}
             {% if field.type == 'BooleanField' %}
-                <label class="checkbox-ios">
+                <label>
                     {{ field(checked=True, class_= 'form-check-input') if value else
                        field(class_= 'form-check-input') }}
-                    <span class="checkbox-ios-switch"></span>
-                    {{ field.label.text }}
+                    {{ field.label }}
                 </label>
             {% elif 'SelectField' in field.type %}
                 {{ field(value=value, class_= 'form-select') }}
+            {% elif 'RadioField' in field.type %}
+                {{ field(value=value, class_= 'list-unstyled') }}
             {% else %}
                 {{ field(value=value, class_= 'form-control') }}
             {% endif %}

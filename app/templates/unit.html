@@ -18,11 +18,17 @@
             {% endblock unitBody %}
 
             {% block unitForm %}
+            {% if unit.form %}
             <div class="row justify-content-center pt-3">
-                <div class="col-6">
+                <div class="col-auto">
+                    {% if unit.form.type == 'group' %}
                     {{ mForms.renderFormGroup(form, url_for('checkUnit', id=unit.id), id='unit', submits=[mButtons.answer]) }}
+                    {% else %}
+                    {{ mForms.renderForm(form, url_for('checkUnit', id=unit.id), id='unit', submit=mButtons.answer) }}
+                    {% endif %}
                 </div>
             </div>
+            {% endif %}
             {% endblock unitForm %}
 
             {% block unitHint %}

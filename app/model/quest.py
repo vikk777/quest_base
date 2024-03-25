@@ -1,10 +1,11 @@
 from flask import url_for
-from .unit import UnitModel
+from .unit import UnitFabric
 
 
 class Quest():
     def __init__(self):
         self.current = 0
+        fabric = UnitFabric()
         self.units = []
         self.units.append(UnitModel(len(self.units), 'pwd'))
         self.units.append(UnitModel(len(self.units), 'pwd2'))
@@ -23,3 +24,7 @@ class Quest():
 
     def progress(self):
         return self.current / len(self.units) * 100
+
+    def next(self):
+        self.current += 1
+        return self.getUnit(self.current)

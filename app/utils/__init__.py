@@ -28,9 +28,7 @@ def unpackArgs(args):
     return args
 
 
-def requestHandler(formClass, pFunc, *funcArgs, formName=None, formArgs={}, message=None, cleanForm=True, **kwargs):
-    form = formClass(formName, **formArgs) if formName else formClass(**formArgs)
-
+def requestHandler(form, pFunc, *funcArgs, formName=None, formArgs={}, message=None, cleanForm=True, **kwargs):
     response = Response()
 
     if form.validate_on_submit():

@@ -6,9 +6,14 @@
 
 {% block content %}
     <section class="pt-5">
-        <div class="container">
-            <h1 class="text-center"></h1>
-            <a href="{{ url_for('getUnit', id=0) }}">Начать</a>
+        <div class="container text-center pt-3 pb-3 rounded-4">
+            <h1 class="text-center pt-3"></h1>
+            <h2 class="text-center pt-3"></h2>
+            <h3 class="text-center pt-3"></h3>
+            <h3 class="text-center pt-3"></h3>
+            <p class="pt-3">
+                <a href="{{ url_for('getUnit', id=0) }}" class="btn btn-primary">Начать</a>
+            </p>
         </div>
     </section>
 {% endblock content %}
