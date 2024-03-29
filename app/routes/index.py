@@ -33,4 +33,4 @@ def next():
 
 @application.route('/end/')
 def congrads():
-    return utils.responseHandler('congrads.html')
+    return utils.responseHandler('congrads.html', wrongs=quest.getWrongs())

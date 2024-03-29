@@ -4,9 +4,30 @@
     <section class="pt-5">
         <div class="container text-center pt-3 pb-3 rounded-4">
             <h1></h1>
-            <div class="row">
-                <div class="col">
-                    <img src="" class="img-fluid">
+            <h3></h3>
+            <div class="row pt-3 justify-content-center g-3">
+                <div class="col-12">
+                    <img src="https://usagif.com/wp-content/uploads/gifs/happy-birthday-friend-12.gif" class="img-fluid">
+                </div>
+                <div class="col-12 text-center">
+                    <h3>Твой личный рейтинг</h3>
+                    {% if wrongs < 3 %}
+                        <h4>Харош ^.^</h4>
+                        <img src="https://usagif.com/wp-content/uploads/gif-nodding-74.gif" class="">
+                    {% elif wrongs < 6 %}
+                        <h4>Сойдет -_-</h4>
+                        <img src="https://usagif.com/wp-content/uploads/gif/angry-2.gif" class="">
+                    {% else %}
+                        <h4>Лошара :P</h4>
+                        <img src="https://usagif.com/wp-content/uploads/gifs/middle-finger-46.gif" class="">
+                    {% endif %}
+                </div>
+                <div class="col-12 text-center">
+                    <h4>Количество ошибок: {{ wrongs }}</h4>
+                </div>
+                <h4 class="text-center pt-3">Твой ПОДАРОК ждет тебя здесь <span class="bi bi-arrow-down"></span></h4>
+                <div class="col-12">
+                    <img src="{{ url_for('static', filename='image/unit25.png') }}" class="img-fluid">
                 </div>
             </div>
         </div>
